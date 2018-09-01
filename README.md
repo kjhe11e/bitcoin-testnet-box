@@ -26,6 +26,31 @@ git clone git@github.com:freewil/bitcoin-testnet-box.git
 git clone --shallow-since 2014-10-18 git@github.com:freewil/bitcoin-testnet-box.git
 ```
 
+## Using with docker
+This testnet-box can be used with [Docker](https://www.docker.com/) to run it in
+an isolated container.
+
+### Building docker image
+
+Pull the image
+  * `docker pull freewil/bitcoin-testnet-box`
+
+or build it yourself from this directory
+  * `docker build -t bitcoin-testnet-box .`
+
+### Running docker container
+The docker image will run two bitcoin nodes in the background and is meant to be
+attached to allow you to type in commands. The image also exposes
+the two JSON-RPC ports from the nodes if you want to be able to access them
+from outside the container.
+      
+   `$ docker run -t -i -p 19001:19001 -p 19011:19011 freewil/bitcoin-testnet-box`
+
+or if you built the docker image yourself:
+
+   `$ docker run -t -i -p 19001:19001 -p 19011:19011 bitcoin-testnet-box`
+
+
 ## Starting the testnet-box
 
 This will start up two nodes using the two datadirs `1` and `2`. They
@@ -38,6 +63,8 @@ Node `1` will listen on port `19000`, allowing node `2` to connect to it.
 
 Node `1` will listen on port `19001` and node `2` will listen on port `19011`
 for the JSON-RPC server.
+
+Exec into the container (`docker exec -it {container_name} bash`) and run:
 
 
 ```
@@ -150,28 +177,4 @@ original state:
 ```
 $ make clean
 ```
-
-## Using with docker
-This testnet-box can be used with [Docker](https://www.docker.com/) to run it in
-an isolated container.
-
-### Building docker image
-
-Pull the image
-  * `docker pull freewil/bitcoin-testnet-box`
-
-or build it yourself from this directory
-  * `docker build -t bitcoin-testnet-box .`
-
-### Running docker container
-The docker image will run two bitcoin nodes in the background and is meant to be
-attached to allow you to type in commands. The image also exposes
-the two JSON-RPC ports from the nodes if you want to be able to access them
-from outside the container.
-      
-   `$ docker run -t -i -p 19001:19001 -p 19011:19011 freewil/bitcoin-testnet-box`
-
-or if you built the docker image yourself:
-
-   `$ docker run -t -i -p 19001:19001 -p 19011:19011 bitcoin-testnet-box`
 
