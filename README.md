@@ -178,3 +178,16 @@ original state:
 $ make clean
 ```
 
+## Using JSON-RPC
+
+Once the nodes are started (exec into container and run `make start`), we can use `JSON-RPC` like:
+
+#### Example 1
+```
+curl --user admin1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"help", "params": [] }' -H 'content-type: text/plain;' http://localhost:19001/
+```
+
+#### Example 2
+```
+curl --user admin1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"getblockchaininfo", "params": [] }' -H 'content-type: text/plain;' http://localhost:19001/
+```
